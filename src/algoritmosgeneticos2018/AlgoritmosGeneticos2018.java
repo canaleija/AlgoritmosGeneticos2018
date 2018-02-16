@@ -27,7 +27,7 @@ public class AlgoritmosGeneticos2018 {
         System.out.println(poblacion[0].getFitness());
         System.out.println(poblacion[149].getFitness());
         System.out.println(poblacion[49].getFitness());
-       
+      
       
     }
     

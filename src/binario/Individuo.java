@@ -26,6 +26,10 @@ public class Individuo {
         generarAleatorio();
         
     }
+    public Individuo(double[] genotipo){
+        this.genotipo = genotipo.clone();
+    
+    }
     private void generarAleatorio() {
        Random ran = new Random();
       
