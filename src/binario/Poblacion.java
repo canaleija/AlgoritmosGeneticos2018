@@ -20,14 +20,21 @@ public class Poblacion {
     // poblacion aleatoria 
     public Poblacion(int tamano){
         this.individuos = new ArrayList<>();
-        for(int x=0;x<tamano;x++)
-            this.individuos.add(new Individuo());
+        for(int x=0;x<tamano;x++){
+            Individuo i = new Individuo();
+            i.getFitness();
+            this.individuos.add(i);}
     }
     // la creacion de una poblacion en base a otra
     public Poblacion(Poblacion pob){
         this.individuos = new ArrayList<>();
         for (Individuo ind: pob.getIndividuos()){
            this.individuos.add(new Individuo(ind.getGenotipo()));
+        }
+        if (pob.getMayor() !=null && pob.getMenor()!=null){
+           this.menor = new Individuo(pob.getMenor().getGenotipo());
+           this.mayor = new Individuo(pob.getMayor().getGenotipo());
+           
         }
     }
     
