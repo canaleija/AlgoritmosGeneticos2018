@@ -74,8 +74,15 @@ public class Individuo {
         } 
     }
     private void calcularFitness() {
-       this.fitness = this.fenotipo*this.fenotipo;
-      //this.fitness = 2*this.fenotipo+4;
+       //this.fitness = this.getFenotipo()*this.getFenotipo();
+      this.fitness = 2*this.fenotipo+4;
+    }
+
+    /**
+     * @return the fenotipo
+     */
+    public double getFenotipo() {
+        return fenotipo;
     }
     
     

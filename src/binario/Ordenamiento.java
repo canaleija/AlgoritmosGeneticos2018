@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Ordenamiento {
     
+    
     private ArrayList<Individuo> datos;
      public Ordenamiento() {
      
@@ -53,28 +54,33 @@ public class Ordenamiento {
            // if (this.getDatos()[leftpos]<this.getDatos()[rightpos]){
             if (this.datos.get(leftpos).getFitness()<this.datos.get(rightpos).getFitness()){
             // tmpArray[tmpPos++] = this.getDatos()[leftpos++];
-               tmpArray.set(tmpPos++, new Individuo(this.datos.get(leftpos++).getGenotipo()));
+               //tmpArray.set(tmpPos++, new Individuo(this.datos.get(leftpos++).getGenotipo()));
+               tmpArray.set(tmpPos++, this.datos.get(leftpos++));
             }else {
-                tmpArray.set(tmpPos++, new Individuo(this.datos.get(rightpos++).getGenotipo()));
+                //tmpArray.set(tmpPos++, new Individuo(this.datos.get(rightpos++).getGenotipo()));
               // tmpArray[tmpPos++] = this.getDatos()[rightpos++];
+                tmpArray.set(tmpPos++, this.datos.get(rightpos++));
             }
         }
         // copiar el resto de la primera mitad
         while (leftpos <= leftEnd){
           //tmpArray[tmpPos++] = this.getDatos()[leftpos++];
-          tmpArray.set(tmpPos++, new Individuo(this.datos.get(leftpos++).getGenotipo()));
+          //tmpArray.set(tmpPos++, new Individuo(this.datos.get(leftpos++).getGenotipo()));
+          tmpArray.set(tmpPos++, this.datos.get(leftpos++));
         }        
         // copiar el resto de la segunda mitad
          while (rightpos <= rightEnd){
           //tmpArray[tmpPos++] = this.getDatos()[rightpos++];
-          tmpArray.set(tmpPos++, new Individuo(this.datos.get(rightpos++).getGenotipo()));
+          //tmpArray.set(tmpPos++, new Individuo(this.datos.get(rightpos++).getGenotipo()));
+          tmpArray.set(tmpPos++ , this.datos.get(rightpos++));
          }  
         
         // actualizar el arreglo 
         // recorrer el arreglo
         for (int i = 0; i < numElements; i++, rightEnd--){
         //this.datos[rightEnd] = tmpArray[rightEnd];
-        this.datos.set(rightEnd,new Individuo(tmpArray.get(rightEnd).getGenotipo()));
+        //this.datos.set(rightEnd,new Individuo(tmpArray.get(rightEnd).getGenotipo()));
+        this.datos.set(rightEnd, tmpArray.get(rightEnd));
         }
             
     }
@@ -86,6 +92,5 @@ public class Ordenamiento {
         return datos;
     }
 
-    
     
 }

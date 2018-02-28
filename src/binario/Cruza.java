@@ -32,7 +32,7 @@ public class Cruza {
      Individuo hijo2 = new Individuo(genotipo2);
      // comparamos el grado de bondad de los 2 hijos 
      
-     if (hijo1.getFitness()>hijo2.getFitness()){
+     if (hijo1.getFitness()<hijo2.getFitness()){
      return hijo1;
      }else {
       return hijo2;
