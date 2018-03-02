@@ -12,6 +12,7 @@ import binario.Muta;
 import binario.Ordenamiento;
 import binario.Poblacion;
 import java.util.ArrayList;
+import tsp.Herramientas;
 
 /**
  *
@@ -24,13 +25,9 @@ public class AlgoritmosGeneticos2018 {
      */
     public static void main(String[] args) {
         
-        
-        Individuo.dimGenotipo = 23;
-        Geneticov1 g1 = new Geneticov1(30,0.3, 200);
-        g1.evolucionar();
-
-        
-      
+        //Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(5, 1000));
+        double[][]distancias = Herramientas.abrirInstancia();
+        System.out.println();
     }
     
 }

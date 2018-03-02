@@ -52,7 +52,7 @@ public class Geneticov1 {
      
        }
        
-       System.out.println("Mejor: "+this.pobActual.getMayor().getFenotipo());
+       System.out.println("Mejor: "+this.pobActual.getMenor().getFenotipo());
     
     }
 
