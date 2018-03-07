@@ -5,13 +5,7 @@
  */
 package algoritmosgeneticos2018;
 
-import binario.Cruza;
-import binario.Geneticov1;
-import binario.Individuo;
-import binario.Muta;
-import binario.Ordenamiento;
-import binario.Poblacion;
-import java.util.ArrayList;
+import tsp.Entidades.Individuo;
 import tsp.Herramientas;
 
 /**
@@ -25,8 +19,9 @@ public class AlgoritmosGeneticos2018 {
      */
     public static void main(String[] args) {
         
-        //Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(5, 1000));
-        double[][]distancias = Herramientas.abrirInstancia();
+        //Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(5, 10));
+        Individuo.distancias = Herramientas.abrirInstancia();
+        Individuo i = new Individuo(new int[]{3,0,2,1});
         System.out.println();
     }
     
