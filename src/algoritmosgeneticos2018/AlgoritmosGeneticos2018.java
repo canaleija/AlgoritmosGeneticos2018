@@ -19,9 +19,9 @@ public class AlgoritmosGeneticos2018 {
      */
     public static void main(String[] args) {
         
-        //Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(5, 10));
-        Individuo.distancias = Herramientas.abrirInstancia();
-        Individuo i = new Individuo(new int[]{3,0,2,1});
+  //      Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
+          Individuo.distancias = Herramientas.abrirInstancia();
+          Individuo i = new Individuo(0);
         System.out.println();
     }
     

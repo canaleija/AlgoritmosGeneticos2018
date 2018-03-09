@@ -5,10 +5,25 @@
  */
 package tsp.operadores;
 
+import java.util.Random;
+import tsp.Entidades.Individuo;
+import tsp.Entidades.Poblacion;
+
 /**
  *
  * @author Roberto Cruz Leija
  */
 public class Seleccion {
+    
+    public static Individuo seleccionAleatoria(Poblacion pob) {
+        Random ran = new Random();
+        return pob.getIndividuos().get(ran.nextInt(pob.getIndividuos().size()));
+
+    }
+    
+    public static Individuo seleccionTorneoTSP(Poblacion pob){
+       pob.calculaMejorIndividuo();
+       return pob.getMejor();
+    }
     
 }

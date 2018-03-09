@@ -62,7 +62,7 @@ public Individuo(int ci) {
         return fitness;
     }
 
-    private void calcularFitness() {
+    public void calcularFitness() {
        // 3 4 1 0 2
        double fit = 0;
        for (int x=0; x < this.genotipo.length;x++){

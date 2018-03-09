@@ -58,6 +58,13 @@ public class Poblacion {
     public ArrayList<Individuo> getIndividuos() {
         return individuos;
     }
+
+    /**
+     * @return the mejor
+     */
+    public Individuo getMejor() {
+        return mejor;
+    }
     
     
     
