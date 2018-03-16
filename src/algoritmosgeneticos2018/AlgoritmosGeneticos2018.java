@@ -6,6 +6,7 @@
 package algoritmosgeneticos2018;
 
 import tsp.Entidades.Individuo;
+import tsp.GeneticoTSPv1;
 import tsp.Herramientas;
 
 /**
@@ -21,8 +22,9 @@ public class AlgoritmosGeneticos2018 {
         
   //      Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
           Individuo.distancias = Herramientas.abrirInstancia();
-          Individuo i = new Individuo(0);
-        System.out.println();
+          GeneticoTSPv1 gen = new GeneticoTSPv1(50, 0.25, 50000,56);
+          gen.evolucionar();
+          System.out.println();
     }
     
 }
