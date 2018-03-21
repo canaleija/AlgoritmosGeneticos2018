@@ -20,9 +20,9 @@ public class AlgoritmosGeneticos2018 {
      */
     public static void main(String[] args) {
         
-  //      Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
+         // Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
           Individuo.distancias = Herramientas.abrirInstancia();
-          GeneticoTSPv1 gen = new GeneticoTSPv1(50, 0.25, 50000,56);
+          GeneticoTSPv1 gen = new GeneticoTSPv1(40, 0.3, 1000,56);
           gen.evolucionar();
           System.out.println();
     }

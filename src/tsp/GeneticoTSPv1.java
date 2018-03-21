@@ -5,6 +5,9 @@
  */
 package tsp;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tsp.Entidades.Individuo;
 import tsp.Entidades.Poblacion;
 import tsp.operadores.Cruza;
@@ -30,7 +33,8 @@ public class GeneticoTSPv1 {
     
     public void evolucionar(){
        Poblacion nuevaPoblacion; 
-            double mejor = this.pobActual.getMejor().getFitness();
+       this.pobActual.getIndividuos().add(Herramientas.sacarMejor());
+       Individuo mejor = this.pobActual.getMejor();
        // agregar el ciclo para las generaciones 
        for(int g=0; g<this.numGeneraciones;g++){
           // proceso iterativo de construccion de la
@@ -54,11 +58,17 @@ public class GeneticoTSPv1 {
        // actualizamos la población actual 
        
        this.pobActual = new Poblacion(nuevaPoblacion);
-       if (this.pobActual.getMejor().getFitness()<mejor) mejor = this.pobActual.getMejor().getFitness();
+       if (this.pobActual.getMejor().getFitness()<mejor.getFitness()) mejor = this.pobActual.getMejor();
        System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitness());
        
        }
-       System.out.println("Mejor mejor: "+mejor);
+        try {
+            // guardar el mejor
+            Herramientas.guardarMejorIndividuo(mejor);
+        } catch (IOException ex) {
+            Logger.getLogger(GeneticoTSPv1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       System.out.println("Mejor mejor: "+mejor.getFitness());
        
     
     }

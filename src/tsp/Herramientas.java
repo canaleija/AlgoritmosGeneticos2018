@@ -8,6 +8,7 @@ package tsp;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import tsp.Entidades.Individuo;
 
 /**
  *
@@ -126,6 +128,94 @@ public class Herramientas {
                     "ERROR!!!", JOptionPane.ERROR_MESSAGE);
         }
         return null;
+    }
+    
+    public static Individuo sacarMejor(){
+        BufferedReader br;
+        Individuo mejor,tmp;
+        String s;
+        String c_ind[];
+        int cromosoma[];
+        ArrayList<Individuo> individuos;
+        
+        individuos = new ArrayList<>();
+        
+         try {        
+            br = new BufferedReader(new FileReader("mejor_10.txt"));
+            
+            //Agregar todos los individous a un ArrayList
+            while((s=br.readLine())!=null){
+                c_ind=s.split(",");
+                cromosoma=new int[c_ind.length];
+                
+                //Convertir de arreglo de string a int
+                for(int x=0;x<c_ind.length;x++){
+                    cromosoma[x]=Integer.parseInt(c_ind[x]);
+                }
+                
+                tmp=new Individuo(cromosoma);
+      
+                individuos.add(tmp);
+            }
+            br.close();
+            
+            //Sacar el mejor
+            if(!individuos.isEmpty()){
+                mejor=individuos.get(0);
+            
+            for(int x=0;x<individuos.size();x++){
+                if(individuos.get(x).getFitness()<(mejor.getFitness())){
+                    mejor=individuos.get(x);
+                }
+            }
+            
+                return mejor;
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+           System.out.println(ex.getMessage());
+        }
+         
+        return null;
+}
+    
+    public static void guardarMejorIndividuo(Individuo ind) throws IOException
+    {
+        //llamamos el metodo que permite cargar la ventana
+        JFileChooser file = new JFileChooser();
+        file.showOpenDialog(file);
+        //abrimos el archivo seleccionado
+        File abre = file.getSelectedFile();
+
+        String ruta = abre.getAbsolutePath();//"C:\\Users\\DE LEON\\Desktop\\" + nombre + ".txt";
+        File archivo = new File(ruta + ".txt");
+        BufferedWriter bw = null;
+        try {
+            if (archivo.exists()) {
+                JOptionPane.showMessageDialog(null, "Archivo ya Existente",
+                        "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            } 
+            else 
+            {
+                bw = new BufferedWriter(new FileWriter(archivo)); 
+                int pos= ind.getGenotipo().length-1;
+                for(int j=0; j<ind.getGenotipo().length;j++)
+                {      
+                    if(j==pos)
+                    {
+                    bw.append("" + ind.getGenotipo()[j]);
+                    }
+                    else
+                    bw.append("" +ind.getGenotipo()[j] + ",");
+                }         
+            }
+                bw.close(); 
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

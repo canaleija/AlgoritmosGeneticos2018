@@ -43,13 +43,13 @@ public class Poblacion {
     public void calculaMejorIndividuo(){
       int im = 0;
          // recorremos la población 
-      for(int i=1;i<this.individuos.size();i++){
-         if(this.individuos.get(im).getFitness()>this.individuos.get(i).getFitness()){
+      for(int i=1;i<this.getIndividuos().size();i++){
+         if(this.getIndividuos().get(im).getFitness()>this.getIndividuos().get(i).getFitness()){
            im=i;
          }
       }
       this.mejor =
-              new Individuo(this.individuos.get(im).getGenotipo());
+              new Individuo(this.getIndividuos().get(im).getGenotipo());
     }
 
     /**
