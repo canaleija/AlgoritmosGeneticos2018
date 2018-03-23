@@ -18,25 +18,27 @@ import tsp.operadores.Seleccion;
  *
  * @author Roberto Cruz Leija
  */
-public class GeneticoTSPv1 {
+public class GeneticoTSPv2 {
     private int tamPob;
     private double probMuta;
     private int numGeneraciones;
     private Poblacion pobActual;
+    private int porMuestra;
 
-    public GeneticoTSPv1(int tamPob, double probMuta, int numGeneraciones, int ci) {
+    public GeneticoTSPv2(int tamPob, double probMuta, int numGeneraciones, int ci) {
         this.tamPob = tamPob;
         this.probMuta = probMuta;
         this.numGeneraciones = numGeneraciones;
         this.pobActual = new Poblacion(tamPob, ci);
+        this.porMuestra = 10;
     }
     
     public void evolucionar(){
        Poblacion nuevaPoblacion;
        
-       Individuo lectura = Herramientas.sacarMejor();
+       //Individuo lectura = Herramientas.sacarMejor();
        
-       this.pobActual.getIndividuos().add(lectura);
+       //this.pobActual.getIndividuos().add(lectura);
        this.pobActual.calculaMejorIndividuo();
        Individuo mejor = this.pobActual.getMejor();
       
@@ -47,8 +49,11 @@ public class GeneticoTSPv1 {
           // proceso iterativo de construccion de la
           // nueva población
           nuevaPoblacion = new Poblacion();
-         
-          for(int i=0;i<this.tamPob;i++){
+          // generar el muestreo
+          int cantidadM = (int)(this.tamPob*(this.porMuestra/100));
+          //generarMuestreo(cantidadM,nuevaPoblacion);
+          nuevaPoblacion.recibirMuestra(this.pobActual.generarGrupoAleatorio(cantidadM));
+          for(int i=cantidadM;i<this.tamPob;i++){
           
           // seleccionar a una madre y un padre
           Individuo madre = Seleccion.seleccionTorneoTSP(pobActual);
@@ -69,14 +74,17 @@ public class GeneticoTSPv1 {
        System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitness());
        
        }
-        try {
-            // guardar el mejor
-            Herramientas.guardarMejorIndividuo(mejor);
-        } catch (IOException ex) {
-            Logger.getLogger(GeneticoTSPv1.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // guardar el mejor
+        // Herramientas.guardarMejorIndividuo(mejor);
        System.out.println("Mejor mejor: "+mejor.getFitness());
        
     
+    }
+
+    /**
+     * @param porMuestra the porMuestra to set
+     */
+    public void setPorMuestra(int porMuestra) {
+        this.porMuestra = porMuestra;
     }
 }

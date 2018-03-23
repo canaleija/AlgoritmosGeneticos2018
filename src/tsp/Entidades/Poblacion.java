@@ -6,6 +6,7 @@
 package tsp.Entidades;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -50,6 +51,24 @@ public class Poblacion {
       }
       this.mejor =
               new Individuo(this.getIndividuos().get(im).getGenotipo());
+    }
+    
+     public ArrayList<Individuo> generarGrupoAleatorio(int numInd){
+        ArrayList<Individuo> grupo = new ArrayList<>();
+        Random ran = new Random();
+        // seleccionar de forma aleatorio a los ind
+        for(int x=0; x<numInd;x++){
+         grupo.add(new Individuo
+        (this.individuos.get(ran.nextInt(this.individuos.size())).getGenotipo()));
+        }
+                  
+     return grupo;
+    }
+     
+    public void recibirMuestra(ArrayList<Individuo> muestra){
+        for (int x=0; x<muestra.size();x++)
+            this.individuos.add(muestra.get(x));
+     
     }
 
     /**
