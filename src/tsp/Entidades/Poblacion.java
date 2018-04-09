@@ -7,6 +7,7 @@ package tsp.Entidades;
 
 import java.util.ArrayList;
 import java.util.Random;
+import tsp.Ordenamiento;
 
 /**
  *
@@ -63,6 +64,20 @@ public class Poblacion {
         }
                   
      return grupo;
+    }
+    
+    public ArrayList<Individuo> generarGrupoMejores(int num){
+        Ordenamiento mezcla = new Ordenamiento();
+        mezcla.ordenar(this);
+        // crear el grupo de mejores
+        ArrayList<Individuo> mejores = new ArrayList<>();
+        for (int x=0;x<num;x++){
+        
+         mejores.add(new Individuo(this.individuos.get(x).getGenotipo()));
+        }
+              
+        return mejores;
+    
     }
      
     public void recibirMuestra(ArrayList<Individuo> muestra){

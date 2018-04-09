@@ -23,7 +23,7 @@ public class AlgoritmosGeneticos2018 {
         
          // Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
           Individuo.distancias = Herramientas.abrirInstancia();
-          GeneticoTSPv2 gen = new GeneticoTSPv2(40, 0.3, 1000,56);
+          GeneticoTSPv2 gen = new GeneticoTSPv2(40, 0.3, 10000,56);
           gen.evolucionar();
           System.out.println();
     }

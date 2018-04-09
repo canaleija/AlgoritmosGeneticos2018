@@ -6,6 +6,7 @@
 package tsp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tsp.Entidades.Individuo;
@@ -42,6 +43,8 @@ public class GeneticoTSPv2 {
        this.pobActual.calculaMejorIndividuo();
        Individuo mejor = this.pobActual.getMejor();
       
+        ArrayList<Double> datosG = new ArrayList<>();
+        
        
 
 // agregar el ciclo para las generaciones 
@@ -50,9 +53,9 @@ public class GeneticoTSPv2 {
           // nueva población
           nuevaPoblacion = new Poblacion();
           // generar el muestreo
-          int cantidadM = (int)(this.tamPob*(this.porMuestra/100));
+          int cantidadM = (int)(this.tamPob*this.porMuestra/100);
           //generarMuestreo(cantidadM,nuevaPoblacion);
-          nuevaPoblacion.recibirMuestra(this.pobActual.generarGrupoAleatorio(cantidadM));
+          nuevaPoblacion.recibirMuestra(this.pobActual.generarGrupoMejores(cantidadM));
           for(int i=cantidadM;i<this.tamPob;i++){
           
           // seleccionar a una madre y un padre
@@ -70,16 +73,23 @@ public class GeneticoTSPv2 {
        // actualizamos la población actual 
        
        this.pobActual = new Poblacion(nuevaPoblacion);
-       if (this.pobActual.getMejor().getFitness()<mejor.getFitness()) mejor = this.pobActual.getMejor();
+       if (this.pobActual.getMejor().getFitness()<mejor.getFitness()) {
+           mejor = this.pobActual.getMejor();
+           datosG.add(mejor.getFitness());
+       }
        System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitness());
        
        }
-        // guardar el mejor
+       // guardar el mejor
         // Herramientas.guardarMejorIndividuo(mejor);
        System.out.println("Mejor mejor: "+mejor.getFitness());
        
-    
-    }
+       
+       Grafica grafica = new Grafica("Mejores","generacion","Fit");
+       grafica.agregarSerie(datosG,"fit");
+       grafica.creaYmuestraGrafica();
+       
+       }
 
     /**
      * @param porMuestra the porMuestra to set
@@ -87,4 +97,9 @@ public class GeneticoTSPv2 {
     public void setPorMuestra(int porMuestra) {
         this.porMuestra = porMuestra;
     }
-}
+        
+    
+    }
+
+
+
