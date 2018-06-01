@@ -59,7 +59,8 @@ public class Cruza {
         Individuo mejor = lista.get(0);
         
         for (int x=1; x<lista.size();x++){
-           if(lista.get(x).getFitness()<mejor.getFitness()){
+          // if(lista.get(x).getFitnessDistancias()<mejor.getFitnessDistancias()){
+           if(lista.get(x).isMejor(mejor)){
             mejor =lista.get(x);
            }
         }

@@ -13,8 +13,10 @@ import java.util.Random;
  */
 public class Individuo {
     public static double[][] distancias;
+    public static double[][] inclinaciones;
     private int[]genotipo;
-    private double fitness;
+    private double fitnessDistancias;
+    private double fitnessInclinaciones;
    
 public Individuo(int[]genotipo){
  this.genotipo = genotipo;
@@ -56,23 +58,48 @@ public Individuo(int ci) {
     }
 
     /**
-     * @return the fitness
+     * @return the fitnessDistancias
      */
-    public double getFitness() {
-        return fitness;
+    public double getFitnessDistancias() {
+        return fitnessDistancias;
     }
 
     public void calcularFitness() {
        // 3 4 1 0 2
        double fit = 0;
+       double fit2 = 0;
        for (int x=0; x < this.genotipo.length;x++){
          if (x!=this.genotipo.length-1){
           fit+=distancias[this.genotipo[x]][this.genotipo[x+1]];
+          
+          fit2+=inclinaciones[this.genotipo[x]][this.genotipo[x+1]]>0
+                   ?inclinaciones[this.genotipo[x]][this.genotipo[x+1]]:0;
+          
          }else{
           fit+=distancias[this.genotipo[x]][this.genotipo[0]];
+          fit2+=inclinaciones[this.genotipo[x]][this.genotipo[0]]>0
+                  ?inclinaciones[this.genotipo[x]][this.genotipo[0]]:0;
          }
        }
-       this.fitness = fit;
+       this.fitnessDistancias = fit;
+       this.fitnessInclinaciones = fit2;
+    }
+
+    /**
+     * @return the fitnessInclinaciones
+     */
+    public double getFitnessInclinaciones() {
+        return fitnessInclinaciones;
+    }
+    
+    public boolean isMejor(Individuo ind){
+       double distancia = ind.getFitnessDistancias();
+       double inclinacion = ind.getFitnessInclinaciones();
+       
+       if(this.fitnessDistancias>distancia && 
+               this.fitnessInclinaciones>inclinacion) 
+           return false;
+       return true;
     }
     
         

@@ -43,6 +43,28 @@ public class Herramientas {
         }
         return matriz;
     }
+    
+     public static double[][] generarMatrizInclinacionesAleatoria(int n, int incliTope) {
+        Random ran = new Random();
+
+        double matriz[][] = new double[n][n];
+        for (int x = 0; x < n; x++) {
+            for (int y = 0; y < n; y++) {
+                if (x == y) {
+                    matriz[x][y] = 0;
+                } else {// si no es igual
+                    double inclinacion = ran.nextInt(incliTope) + ran.nextDouble();
+                    // determinar si el valor de inclinacion será +/-
+                    if(ran.nextInt(2)==0)inclinacion*=-1;
+                    matriz[x][y] = inclinacion;
+                    matriz[y][x] = inclinacion*-1;
+                }
+            }
+        }
+        return matriz;
+    }
+    
+    
 
     public static void guardarInstancia(double[][] matriz) {
         //llamamos el metodo que permite cargar la ventana
@@ -164,7 +186,7 @@ public class Herramientas {
                 mejor=individuos.get(0);
             
             for(int x=0;x<individuos.size();x++){
-                if(individuos.get(x).getFitness()<(mejor.getFitness())){
+                if(individuos.get(x).getFitnessDistancias()<(mejor.getFitnessDistancias())){
                     mejor=individuos.get(x);
                 }
             }

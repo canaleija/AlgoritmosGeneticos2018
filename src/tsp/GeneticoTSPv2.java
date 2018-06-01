@@ -73,16 +73,16 @@ public class GeneticoTSPv2 {
        // actualizamos la población actual 
        
        this.pobActual = new Poblacion(nuevaPoblacion);
-       if (this.pobActual.getMejor().getFitness()<mejor.getFitness()) {
+       if (this.pobActual.getMejor().getFitnessDistancias()<mejor.getFitnessDistancias()) {
            mejor = this.pobActual.getMejor();
-           datosG.add(mejor.getFitness());
+           datosG.add(mejor.getFitnessDistancias());
        }
-       System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitness());
+       System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitnessDistancias());
        
        }
        // guardar el mejor
         // Herramientas.guardarMejorIndividuo(mejor);
-       System.out.println("Mejor mejor: "+mejor.getFitness());
+       System.out.println("Mejor mejor: "+mejor.getFitnessDistancias());
        
        
        Grafica grafica = new Grafica("Mejores","generacion","Fit");

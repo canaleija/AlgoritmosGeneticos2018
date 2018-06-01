@@ -23,22 +23,28 @@ public class GeneticoTSPv1 {
     private double probMuta;
     private int numGeneraciones;
     private Poblacion pobActual;
+     Grafica grafica;
 
     public GeneticoTSPv1(int tamPob, double probMuta, int numGeneraciones, int ci) {
         this.tamPob = tamPob;
         this.probMuta = probMuta;
         this.numGeneraciones = numGeneraciones;
         this.pobActual = new Poblacion(tamPob, ci);
+        // graficamos 
+        grafica = new Grafica("Grafica","inclinaciones"
+                             ,"Distancias");
+          grafica.crearSerie("pobinicial");
+          grafica.agregarConjuntoDatosASerie("pobinicial", pobActual);
     }
     
     public void evolucionar(){
        Poblacion nuevaPoblacion;
        
-       Individuo lectura = Herramientas.sacarMejor();
+      // Individuo lectura = Herramientas.sacarMejor();
        
-       this.pobActual.getIndividuos().add(lectura);
-       this.pobActual.calculaMejorIndividuo();
-       Individuo mejor = this.pobActual.getMejor();
+   //  this.pobActual.getIndividuos().add(lectura);
+   //    this.pobActual.calculaMejorIndividuo();
+   //    Individuo mejor = this.pobActual.getMejor();
       
        
 
@@ -52,7 +58,7 @@ public class GeneticoTSPv1 {
           
           // seleccionar a una madre y un padre
           Individuo madre = Seleccion.seleccionTorneoTSP(pobActual);
-          Individuo padre = Seleccion.seleccionAleatoria(pobActual);
+          Individuo padre = Seleccion.seleccionTorneoTSP(pobActual);
           // cruza
           Individuo nuevoi = Cruza.cruzaAsexual(padre, madre);
           // muta (evaluar la probabilidad)
@@ -65,18 +71,17 @@ public class GeneticoTSPv1 {
        // actualizamos la población actual 
        
        this.pobActual = new Poblacion(nuevaPoblacion);
-       if (this.pobActual.getMejor().getFitness()<mejor.getFitness()) mejor = this.pobActual.getMejor();
-       System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitness());
-       
+//       if (this.pobActual.getMejor().getFitnessDistancias()<mejor.getFitnessDistancias()) mejor = this.pobActual.getMejor();
+//       System.out.println("Mejor "+g+": "+this.pobActual.getMejor().getFitnessDistancias());
+//       
+//       }
+       //        System.out.println("Mejor mejor: "+mejor.getFitnessDistancias());
+       System.out.println(g);
        }
-        try {
-            // guardar el mejor
-            Herramientas.guardarMejorIndividuo(mejor);
-        } catch (IOException ex) {
-            Logger.getLogger(GeneticoTSPv1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       System.out.println("Mejor mejor: "+mejor.getFitness());
        
-    
+       // vamos a graficar la ultima población
+       this.grafica.crearSerie("pobFinal");
+       this.grafica.agregarConjuntoDatosASerie("pobFinal", pobActual);
+       this.grafica.creaYmuestraGraficaPuntos();
     }
 }

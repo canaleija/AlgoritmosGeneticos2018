@@ -55,7 +55,7 @@ public class Ordenamiento {
         // generar los cambios en el arreglo temporal 
         while (leftpos <= leftEnd && rightpos<=rightEnd) {
            // if (this.getDatos()[leftpos]<this.getDatos()[rightpos]){
-            if (this.datos.get(leftpos).getFitness()<this.datos.get(rightpos).getFitness()){
+            if (this.datos.get(leftpos).getFitnessDistancias()<this.datos.get(rightpos).getFitnessDistancias()){
             // tmpArray[tmpPos++] = this.getDatos()[leftpos++];
                //tmpArray.set(tmpPos++, new Individuo(this.datos.get(leftpos++).getGenotipo()));
                tmpArray.set(tmpPos++, this.datos.get(leftpos++));

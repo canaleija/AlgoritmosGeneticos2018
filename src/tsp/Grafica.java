@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYDataItem;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import tsp.Entidades.Individuo;
+import tsp.Entidades.Poblacion;
 
 /**
  *
@@ -31,8 +34,33 @@ public class Grafica {
      this.tituloEjeY = ty;
     
     }
+    public void crearSerie(String nombre){
+      XYSeries serie = new XYSeries(nombre);
+      this.series.addSeries(serie);
+    }
+    public void agregarDatoASerie(String nombre,double dis,double inc){
+      XYSeries serie = this.series.getSeries(nombre);
+      serie.add(new XYDataItem(dis, inc));
+    }
+    public void agregarConjuntoDatosASerie(String nombre,Poblacion pob){
+     
+        for (Individuo ind: pob.getIndividuos()){
+            agregarDatoASerie(nombre, ind.getFitnessDistancias(), ind.getFitnessInclinaciones());
+        }
+     
+    }
     
     public void agregarSerie (ArrayList <Double> datosSerie, String nombreSerie){
+       // instanciamos la serie
+        XYSeries serie = new XYSeries(nombreSerie);
+        // recorrer los datos para agregarlos a la serie
+        for (int x = 0 ; x < datosSerie.size();x++){
+        serie.add(x, datosSerie.get(x));
+      }
+     // agregamos al serie a la coleccion de series
+     this.series.addSeries(serie);
+    }
+     public void agregarSerie2 (ArrayList <Double> datosSerie, String nombreSerie){
        // instanciamos la serie
         XYSeries serie = new XYSeries(nombreSerie);
         // recorrer los datos para agregarlos a la serie
@@ -46,6 +74,17 @@ public class Grafica {
     public void creaYmuestraGrafica(){
     
         this.grafica = ChartFactory.createXYLineChart(nombre, tituloEjeX, tituloEjeY, series);
+        
+        // utilizar un panel especial dentro de jfreechart
+        ChartFrame panel = new ChartFrame("grafica",grafica);
+        panel.pack();
+        panel.setVisible(true);
+        
+        
+    }
+     public void creaYmuestraGraficaPuntos(){
+    
+        this.grafica = ChartFactory.createScatterPlot(nombre, tituloEjeX, tituloEjeY, series);
         
         // utilizar un panel especial dentro de jfreechart
         ChartFrame panel = new ChartFrame("grafica",grafica);

@@ -46,7 +46,8 @@ public class Poblacion {
       int im = 0;
          // recorremos la población 
       for(int i=1;i<this.getIndividuos().size();i++){
-         if(this.getIndividuos().get(im).getFitness()>this.getIndividuos().get(i).getFitness()){
+         //if(this.getIndividuos().get(im).getFitnessDistancias()>this.getIndividuos().get(i).getFitnessDistancias()){
+         if(this.individuos.get(i).isMejor(this.individuos.get(im))){
            im=i;
          }
       }

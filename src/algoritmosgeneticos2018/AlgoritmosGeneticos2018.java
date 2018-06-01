@@ -6,8 +6,10 @@
 package algoritmosgeneticos2018;
 
 import tsp.Entidades.Individuo;
+import tsp.Entidades.Poblacion;
 import tsp.GeneticoTSPv1;
 import tsp.GeneticoTSPv2;
+import tsp.Grafica;
 import tsp.Herramientas;
 
 /**
@@ -21,11 +23,15 @@ public class AlgoritmosGeneticos2018 {
      */
     public static void main(String[] args) {
         
-         // Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
+        //  Herramientas.guardarInstancia(Herramientas.generarMatrizDistanciasAleatoria(1000, 100));
+        //  Herramientas.guardarInstancia(Herramientas.generarMatrizInclinacionesAleatoria(1000, 101));
           Individuo.distancias = Herramientas.abrirInstancia();
-          GeneticoTSPv2 gen = new GeneticoTSPv2(40, 0.3, 10000,56);
+          Individuo.inclinaciones = Herramientas.abrirInstancia();
+         
+          GeneticoTSPv1 gen = new GeneticoTSPv1(100, 0.35,10000, 5);
           gen.evolucionar();
-          System.out.println();
+          
+       //   System.out.println();
     }
     
 }
