@@ -57,7 +57,7 @@ public class GeneticoTSPv1 {
           for(int i=0;i<this.tamPob;i++){
           
           // seleccionar a una madre y un padre
-          Individuo madre = Seleccion.seleccionTorneoTSP(pobActual);
+          Individuo madre = Seleccion.seleccionAleatoria(pobActual);
           Individuo padre = Seleccion.seleccionTorneoTSP(pobActual);
           // cruza
           Individuo nuevoi = Cruza.cruzaAsexual(padre, madre);

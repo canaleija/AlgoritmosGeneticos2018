@@ -27,8 +27,10 @@ public class AlgoritmosGeneticos2018 {
         //  Herramientas.guardarInstancia(Herramientas.generarMatrizInclinacionesAleatoria(1000, 101));
           Individuo.distancias = Herramientas.abrirInstancia();
           Individuo.inclinaciones = Herramientas.abrirInstancia();
-         
-          GeneticoTSPv1 gen = new GeneticoTSPv1(100, 0.35,10000, 5);
+          Individuo.w1 = 0.5;
+          Individuo.w2 = 1;
+          
+          GeneticoTSPv1 gen = new GeneticoTSPv1(100, 0.35,1000, 5);
           gen.evolucionar();
           
        //   System.out.println();

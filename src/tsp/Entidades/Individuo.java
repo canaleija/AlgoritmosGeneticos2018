@@ -12,11 +12,13 @@ import java.util.Random;
  * @author Roberto Cruz Leija
  */
 public class Individuo {
+    public static double w1,w2;
     public static double[][] distancias;
     public static double[][] inclinaciones;
     private int[]genotipo;
     private double fitnessDistancias;
     private double fitnessInclinaciones;
+    private double fitnesstTx;
    
 public Individuo(int[]genotipo){
  this.genotipo = genotipo;
@@ -83,6 +85,7 @@ public Individuo(int ci) {
        }
        this.fitnessDistancias = fit;
        this.fitnessInclinaciones = fit2;
+       this.fitnesstTx = w1*this.fitnessDistancias+w2*this.fitnessInclinaciones;
     }
 
     /**
@@ -93,13 +96,30 @@ public Individuo(int ci) {
     }
     
     public boolean isMejor(Individuo ind){
-       double distancia = ind.getFitnessDistancias();
-       double inclinacion = ind.getFitnessInclinaciones();
+//       double distancia = ind.getFitnessDistancias();
+//       double inclinacion = ind.getFitnessInclinaciones();
+       if(this.fitnesstTx<ind.getFitnesstTx()){
        
-       if(this.fitnessDistancias>distancia && 
-               this.fitnessInclinaciones>inclinacion) 
-           return false;
        return true;
+       }
+       
+//       if (this.fitnessInclinaciones<inclinacion || 
+//               this.fitnessDistancias<distancia)return true;
+//       
+       // Agregar los de los pesos "importancia"
+//       
+//       if(this.fitnessDistancias>distancia && 
+//               this.fitnessInclinaciones>inclinacion) 
+//           return false;
+//       return true;
+    return false;
+    }
+
+    /**
+     * @return the fitnesstTx
+     */
+    public double getFitnesstTx() {
+        return fitnesstTx;
     }
     
         
